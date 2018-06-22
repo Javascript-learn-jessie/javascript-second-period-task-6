@@ -11,7 +11,7 @@ $(document).ready(function () {
             $(`b.price-${i}`).after(`&nbsp&nbsp<b class=prom-${i} style="color:red;font-size:10px" >${info}</b>&nbsp&nbsp`);
         }
         $(`span.item-${i}`).append(`&nbsp&nbsp数量：<input type='number' class='item-${i}num' min=0 style="width:5%">`);
-        $(`input.item-${i}num`).after(`&nbsp&nbsp<button class=${i}-add2Car>加入购物车</button>`);
+        $(`input.item-${i}num`).after(`&nbsp&nbsp<button class=${i}-add2Car id='add'>加入购物车</button>`);
         $(`span.item-${i}`).after('<hr style="height:2px;border:none;border-top:2px dashed #555555;" />');
     }
     // console.log(111);
@@ -37,7 +37,7 @@ function promotionType(promotions) {
     var info = [];
     for (let promotion of promotions) {
         switch (promotion) {
-            case "BUY_TWO_GET_ONE_FREE": info.push("买一赠一");
+            case "BUY_TWO_GET_ONE_FREE": info.push("买二赠一");
                 break;
         }
 
