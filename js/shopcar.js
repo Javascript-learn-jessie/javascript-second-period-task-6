@@ -1,24 +1,27 @@
+
 //var itemInfo = [];
 $(document).ready(function () {
-    var itemInfo=[];
-    
-    $(document).on("click", `#add`, function () {
-        let info = { name: "", price: "", num: "", promotion: "",unit:"" };
-        let index = $(this).attr('class')[0];
-        info.name = $(`b.item-${index}`).text();
-        info.price = $(`b.price-${index}`).text().split(" ")[0];
-        let unit = $(`b.price-${index}`).text().split("");
-        info.unit = unit[unit.length-1];
-        info.num = $(`input.item-${index}num`).val();
-        info.promotion = $(`b.prom-${index}`).text();
-        itemInfo.push(info);
-    });
+    var itemInfo = decodeURI(getQueryVariable("items"));//字符串
+    var items = $.parseJSON(itemInfo);//对象
+    for (var i = 0; i < items.length; i++) {
+        promotionInfo = promotionType(isPromotion(items[i].barcode))
+    $("span.goodsList").append(`<p>名称：${items[i].name}  数量：${items[i].num}  单价：${items[i].price} &yen/${items[i].unit} 
+    <b style="color:red;font-size:10px">${items[i].promotion}<b></p>`);
 
+    }
     $("button.pay").click(function () {
-        let strInfo = JSON.stringify(itemInfo)
-       window.location.href = `../html/shopcar.html?items=${strInfo}`;
+     //   let strInfo = JSON.stringify(itemInfo)
+       window.location.href = `../html/payList.html?items=${itemInfo}`;
     })
 
 });
-
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) { return pair[1]; }
+    }
+    return (false);
+}
 

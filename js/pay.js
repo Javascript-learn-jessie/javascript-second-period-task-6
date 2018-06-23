@@ -24,7 +24,6 @@ $(document).ready(function () {
         }
         if (item.num <= 2) {
             sum = parseFloat(item.price) * parseFloat(item.num);
-            isPromotion = false;
         }
         total += sum;
         let info = `名称：${item.name}，数量：${item.num}${item.unit}，单价：${item.price}(元)，小计：${sum}(元)`;
